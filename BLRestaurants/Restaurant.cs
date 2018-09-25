@@ -9,7 +9,7 @@ namespace BLRestaurants
     class Restaurant
     {
         public int ID { get; set; }
-        public int RestaurantName { get; set; }
+        public string RestaurantName { get; set; }
         public BLType Type { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }

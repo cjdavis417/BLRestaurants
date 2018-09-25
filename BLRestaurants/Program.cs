@@ -13,7 +13,7 @@ namespace BLRestaurants
         {
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
-            var fileName = Path.Combine(directory.FullName, "restaurant.csv");
+            var fileName = Path.Combine(directory.FullName, "restaurants.csv");
             var fileContents = ReadRestaurants(fileName);
         }
 
@@ -29,10 +29,21 @@ namespace BLRestaurants
                     var restaurant = new Restaurant();
                     string[] values = line.Split(',');
 
-                    int ID;
-                    if (int.TryParse(values[0], out ID))
+                    int intParse;
+                    if (int.TryParse(values[0], out intParse))
                     {
-                        restaurant.ID = ID;
+                        restaurant.ID = intParse;
+                    }
+                    restaurant.RestaurantName = values[1];
+
+                    double doubleParse;
+                    if (double.TryParse(values[3], out doubleParse))
+                    {
+                        restaurant.Longitude = doubleParse;
+                    }
+                    if (double.TryParse(values[4], out doubleParse))
+                    {
+                        restaurant.Latitude = doubleParse;
                     }
 
                     listRestaurants.Add(restaurant);
