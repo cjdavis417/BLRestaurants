@@ -1,5 +1,5 @@
-ID,Restaurant_Name,Type,Longitude,Latitude
-1,Ramsis Cafe on the World,1,-85.715495,38.235727
-2,Bristol Bar and Grill,1,-85.612441,38.268442
-3,Louvino,2,-85.704651,38.230478
-4,Louvino,2,-85.545052,38.243681
+ID,Restaurant_ID,Restaurant_Name,Type,Longitude,Latitude
+1,1,Ramsis Cafe on the World,Buffet,-85.715495,38.235727
+2,2,Bristol Bar and Grill,Buffet,-85.612441,38.268442
+3,3,Louvino,Brunch,-85.704651,38.230478
+4,3,Louvino,Brunch,-85.545052,38.243681
