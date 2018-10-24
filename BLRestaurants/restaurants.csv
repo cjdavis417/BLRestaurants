@@ -1,5 +1,5 @@
-ID,Restaurant_Name,Type,Longitude,Latitude,Address
-1,Ramsis Cafe on the World,Buffet,-85.715495,38.235727,somewhere
-2,Bristol Bar and Grill,Buffet,-85.612441,38.268442,somewhere
-3,Louvino,Brunch,-85.704651,38.230478,somewhere
-4,Louvino,Brunch,-85.545052,38.243681,somewhere
+ID,Restaurant_Name,Type,Longitude,Latitude,StreetAddress,City,State,Zip,Telephone
+1,Ramsis Cafe on the World,Buffet,-85.715495,38.235727,1293 Bardstown Rd.,Louisville,KY,40204,(502) 451-0700
+2,Bristol Bar and Grill,Buffet,-85.612441,38.268442,1321 Bardstown Rd.,Louisville,KY,40204,502-456-1702
+3,Louvino,Brunch,-85.704651,38.230478,1606 Bardstown Rd.,Louisville,KY,40205,(502) 365-1921
+4,Louvino,Brunch,-85.545052,38.243681,11400 Main St.,Louisville,KY,40243,(502) 742-1456
