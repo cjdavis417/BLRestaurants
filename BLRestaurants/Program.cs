@@ -9,7 +9,7 @@ namespace BLRestaurants
 {
     class Program
     {
-        public List<string> ListOfCommands = new List<string> { "Help", "Print All", "Write Review", "Exit" };
+        public List<string> ListOfCommands = new List<string> { "Help", "Print All", "Write Review", "Exit", "Select Restaurant Reviews" };
         string command;
 
         static void Main(string[] args)
@@ -25,6 +25,15 @@ namespace BLRestaurants
 
         public void ReceiveCommand()
         {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            DirectoryInfo directory = new DirectoryInfo(currentDirectory);
+            var fileName = Path.Combine(directory.FullName, "restaurants.csv");
+            var fileReviews = Path.Combine(directory.FullName, "Reviews.csv");
+            //var fileContents = ReadRestaurants(fileName, fileReviews);
+            Restaurants restaurants = new Restaurants();
+            restaurants.GetCurrentRestaurantList(fileName, fileReviews);
+            var restaurantsList = restaurants.restaurants;
+
             do
             {
                 Console.Write("Command:> ");
@@ -35,14 +44,42 @@ namespace BLRestaurants
                 if (command == "help")
                     Commands(ListOfCommands);
                 else if (command == "print all")
-                    ListRestaurants();
+                    ListRestaurants(restaurants.restaurants);
                 else if (command == "write review")
-                    WriteReview();
+                    WriteReview(restaurants.restaurants);
+                else if (command == "select restaurant reviews")
+                    SelectRestaurantReview(restaurantsList);
                 else if (command == "exit")
                     break;
                 else
                     Console.WriteLine("Please enter a valid command.");
             } while (true);
+        }
+
+        private void SelectRestaurantReview(List<Restaurant> restaurants)
+        {
+            Console.Write("Which restaurant reviews do you want to see the reviews for? ");
+            var restaurantToReview = Console.ReadLine();
+
+            // object to hold the selected reviews.
+            Reviews Reviews = new Reviews();
+
+            foreach (var restaurant in restaurants)
+            {
+                if (restaurantToReview == restaurant.RestaurantName)
+                {
+                    foreach (var review in restaurant.Reviews)
+                    {
+                        Reviews.ReviewsList.Add(review);
+                    }
+                }
+            }
+
+            foreach (var gatheredReview in Reviews.ReviewsList)
+            {
+                Console.WriteLine(gatheredReview);
+            }
+
         }
 
         public void Commands(List<string> commands)
@@ -54,19 +91,14 @@ namespace BLRestaurants
             ReceiveCommand();
         }
 
-        public void ListRestaurants()
+        public void ListRestaurants(List<Restaurant> restaurantList)
         {
-            string currentDirectory = Directory.GetCurrentDirectory();
-            DirectoryInfo directory = new DirectoryInfo(currentDirectory);
-            var fileName = Path.Combine(directory.FullName, "restaurants.csv");
-            var fileReviews = Path.Combine(directory.FullName, "Reviews.csv");
-            var fileContents = ReadRestaurants(fileName, fileReviews);
 
-            foreach (var content in fileContents)
+            foreach (var restaurant in restaurantList)
             {
-                Console.WriteLine("{0}, Average: {1}", content.RestaurantName, content.CalcAverage(content.Reviews));
-                Console.WriteLine(content.Restaurant_Type);
-                foreach (var review in content.Reviews)
+                Console.WriteLine("{0}, Average: {1}", restaurant.RestaurantName, restaurant.CalcAverage(restaurant.Reviews));
+                Console.WriteLine(restaurant.Restaurant_Type);
+                foreach (var review in restaurant.Reviews)
                 {
                     Console.WriteLine("Title: {0}, Rating: {1}/5", review.Title, review.Star_Rating);
                     Console.WriteLine(review.Writeup);
@@ -77,92 +109,39 @@ namespace BLRestaurants
             ReceiveCommand();
         }
 
-        public static List<Restaurant> ReadRestaurants(string fileName, string fileReviews)
-        {
-            var Restaurants = new List<Restaurant>();
-            using (var reader = new StreamReader(fileName))
-            {
-                string line = "";
-                reader.ReadLine();
-                while ((line = reader.ReadLine()) != null)
-                {
-                    var restaurant = new Restaurant();
-                    string[] values = line.Split(',');
-
-                    int intParse;
-                    if (int.TryParse(values[0], out intParse))
-                    {
-                        restaurant.ID = intParse;
-                    }
-                    restaurant.RestaurantName = values[1];
-                    restaurant.Restaurant_Type = values[2];
-
-                    double doubleParse;
-                    if (double.TryParse(values[3], out doubleParse))
-                    {
-                        restaurant.Longitude = doubleParse;
-                    }
-                    if (double.TryParse(values[4], out doubleParse))
-                    {
-                        restaurant.Latitude = doubleParse;
-                    }
-
-                    // brings in the reviews here
-                    var Reviews = new List<Review>();
-                    using (var reviewReader = new StreamReader(fileReviews))
-                    {
-                        string line2 = "";
-                        reviewReader.ReadLine();
-                        while ((line2 = reviewReader.ReadLine()) != null)
-                        {
-                            var review = new Review();
-                            string[] values2 = line2.Split(',');
-
-                            if (values[0] == values2[1]) // (if ID of restaurant equals the reviews' restaurant ID. values2 is the list of reviews
-                            { 
-                                int intParse2;
-                                if (int.TryParse(values2[0], out intParse2))
-                                {
-                                    review.ID = intParse2;
-                                }
-                                if (int.TryParse(values2[1], out intParse2))
-                                {
-                                    review.Restaurant_ID = intParse2;
-                                }
-                                review.Title = values2[2];
-                                if (int.TryParse(values2[3], out intParse2))
-                                {
-                                    review.Star_Rating = intParse2;
-                                }
-                                review.Writeup = values2[4];
-
-                                Reviews.Add(review);
-                            }
-                        }
-                        
-                    }
-
-                    restaurant.Reviews = Reviews;
-
-                    Restaurants.Add(restaurant);
-                }
-            }
-
-                return Restaurants;
-        }
-
-        public void WriteReview()
+        public void WriteReview(List<Restaurant> restaurants)
         {
             Review review = new Review();
-            Console.Write("What restaurant are you reviewing? ");
-            var restaraunt = Console.ReadLine();
-            Console.Write("Which location? ");
+            Console.WriteLine("What restaurant are you reviewing? ");
+            var reviewRestaurant = Console.ReadLine();
+
+            Console.WriteLine("Which location? ");
+            LocationBuilder(restaurants, reviewRestaurant);
             var loc = Console.ReadLine();
+
             Console.Write("What star rating are you giving it? (1 through 5, whole numbers) ");
             var rating = Console.ReadLine();
             review.Star_Rating = Int32.Parse(rating);
+
             Console.Write("Please type your review. ");
             review.Writeup = Console.ReadLine();
+        }
+
+        public void LocationBuilder(List<Restaurant> restaurants, string restaurantName)
+        {
+            List<Restaurant> restaurantLocs = new List<Restaurant>();
+            foreach (var restaurant in restaurants)
+            {
+                if (restaurant.RestaurantName == restaurantName)
+                {
+                    restaurantLocs.Add(restaurant);
+                }
+            }
+
+            foreach (var restaurant in restaurantLocs)
+            {
+                Console.Write("{0} {1}", restaurant.StreetAddress, restaurant.City);
+            }
         }
     }
 }

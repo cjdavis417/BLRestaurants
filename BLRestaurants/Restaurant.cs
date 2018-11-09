@@ -16,7 +16,12 @@ namespace BLRestaurants
         public double Latitude { get; set; }
         public List<Review> Reviews { get; set; }
         public double ReviewAverage { get; set; }
-        public string Address { get; set; }
+        public string StreetAddress { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public int Zip { get; set; }
+        public string Telephone { get; set; }
+        
 
         public double CalcAverage(List<Review> reviews)
         {
@@ -29,6 +34,8 @@ namespace BLRestaurants
 
             return average;
         }
+
+        
 
     }
 }
