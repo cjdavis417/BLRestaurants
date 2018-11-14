@@ -30,6 +30,7 @@ namespace BLRestaurants
             var fileName = Path.Combine(directory.FullName, "restaurants.csv");
             var fileReviews = Path.Combine(directory.FullName, "Reviews.csv");
             //var fileContents = ReadRestaurants(fileName, fileReviews);
+
             Restaurants restaurants = new Restaurants();
             restaurants.GetCurrentRestaurantList(fileName, fileReviews);
             var restaurantsList = restaurants.restaurants;
@@ -100,7 +101,7 @@ namespace BLRestaurants
                 Console.WriteLine(restaurant.Restaurant_Type);
                 foreach (var review in restaurant.Reviews)
                 {
-                    Console.WriteLine("Title: {0}, Rating: {1}/5", review.Title, review.Star_Rating);
+                    Console.WriteLine("Title: {0}, Rating: {1}/5", review.Title, review.StarRating);
                     Console.WriteLine(review.Writeup);
                 }
                 Console.WriteLine();
@@ -121,7 +122,7 @@ namespace BLRestaurants
 
             Console.Write("What star rating are you giving it? (1 through 5, whole numbers) ");
             var rating = Console.ReadLine();
-            review.Star_Rating = Int32.Parse(rating);
+            review.StarRating = Int32.Parse(rating);
 
             Console.Write("Please type your review. ");
             review.Writeup = Console.ReadLine();

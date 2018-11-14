@@ -9,9 +9,9 @@ namespace BLRestaurants
     class Review
     {
         public int ID { get; set; }
-        public int Restaurant_ID { get; set; }
+        public string RestaurantName { get; set; }
         public string Title { get; set; }
-        public int Star_Rating { get; set; }
+        public int StarRating { get; set; }
         public string Writeup { get; set; }
     }
 }

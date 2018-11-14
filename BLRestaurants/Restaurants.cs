@@ -11,8 +11,7 @@ namespace BLRestaurants
     {
         public List<Restaurant> restaurants { get; set; }
 
-
-
+        
         public void GetCurrentRestaurantList(string fileName, string fileReviews)
         {
             var RestaurantList = new List<Restaurant>();
@@ -44,6 +43,7 @@ namespace BLRestaurants
                     }
 
                     // brings in the reviews here
+                    
                     var Reviews = new List<Review>();
                     using (var reviewReader = new StreamReader(fileReviews))
                     {
@@ -55,21 +55,20 @@ namespace BLRestaurants
                             string[] values2 = line2.Split(',');
                             
 
-                            if (values[0] == values2[1]) // (if ID of restaurant equals the reviews' restaurant ID. values2 is the list of reviews
+                            if (values[1] == values2[1]) // (if ID of restaurant equals the reviews' restaurant ID. values2 is the list of reviews
                             {
                                 int intParse2;
                                 if (int.TryParse(values2[0], out intParse2))
                                 {
                                     review.ID = intParse2;
                                 }
-                                if (int.TryParse(values2[1], out intParse2))
-                                {
-                                    review.Restaurant_ID = intParse2;
-                                }
+                                
+                                review.RestaurantName = values2[1];
+                                
                                 review.Title = values2[2];
                                 if (int.TryParse(values2[3], out intParse2))
                                 {
-                                    review.Star_Rating = intParse2;
+                                    review.StarRating = intParse2;
                                 }
                                 review.Writeup = values2[4];
 
@@ -81,7 +80,7 @@ namespace BLRestaurants
                         }
                         
                     }
-
+                    restaurant.Reviews = Reviews;
                     double average = restaurant.CalcAverage(Reviews);
                     restaurant.ReviewAverage = average;
 

@@ -28,7 +28,7 @@ namespace BLRestaurants
             double average = 0.0;
             foreach (var review in reviews)
             {
-                average = average + review.Star_Rating;
+                average = average + review.StarRating;
             }
             average = average / reviews.Count;
 

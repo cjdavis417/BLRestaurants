@@ -1,12 +1,12 @@
-﻿ID,Restaurant_ID,Title,Star_Rating,Writeup
-1,1,Fantastic,4,Fantastic!  I'd recommend to anyone
-2,3,Bleh,2,Crap!
-3,2,Nice,5,Yum! These people know what they are doing!
-4,2,huh,2,I don't get it.
-5,1,dissapointing,1,How is this a thing?
-6,3,Meh,2,Meh
-7,3,Eck!,2,There was a fly in my soup.
-8,2,duh,1,Missed the mark by a long shot.
-9,2,Nice!,5,Most impressive!
-10,3,Pobrecito,5,Please Sir.  May I have more?
-11,4,What Happened,3,I've been to other locations and this one is dirty and gross.  The chef was chasing the waitress around in the kitchen with a cleaver.  I like my food fresh, but that is a bit much.
+﻿ID,Restaurant_Name,Title,Star_Rating,Writeup
+1,Ramsis Cafe on the World,Fantastic,4,Fantastic!  I'd recommend to anyone
+2,Louvino,Bleh,2,Crap!
+3,Bristol Bar and Grill,Nice,5,Yum! These people know what they are doing!
+4,Bristol Bar and Grill,huh,2,I don't get it.
+5,Ramsis Cafe on the World,dissapointing,1,How is this a thing?
+6,Louvino,Meh,2,Meh
+7,Louvino,Eck!,2,There was a fly in my soup.
+8,Bristol Bar and Grill,duh,1,Missed the mark by a long shot.
+9,Bristol Bar and Grill,Nice!,5,Most impressive!
+10,Louvino,Pobrecito,5,Please Sir.  May I have more?
+11,Louvino,What Happened,3,I've been to other locations and this one is dirty and gross.  The chef was chasing the waitress around in the kitchen with a cleaver.  I like my food fresh, but that is a bit much.
