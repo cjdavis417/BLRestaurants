@@ -11,7 +11,11 @@ namespace BLRestaurants
     {
         public List<Restaurant> restaurants { get; set; }
 
-        
+        /// <summary>
+        /// Compiles all the restaurants and reviews from two .csv's into a List
+        /// </summary>
+        /// <param name="fileName">This is the Path.Combine object of the restaurants</param>
+        /// <param name="fileReviews">This is the Path.Combine object of the reviews</param>
         public void GetCurrentRestaurantList(string fileName, string fileReviews)
         {
             var RestaurantList = new List<Restaurant>();
@@ -23,7 +27,7 @@ namespace BLRestaurants
                 {
                     var restaurant = new Restaurant();
                     string[] values = line.Split(',');
-
+                    
                     int intParse;
                     if (int.TryParse(values[0], out intParse))
                     {
@@ -43,7 +47,6 @@ namespace BLRestaurants
                     }
 
                     // brings in the reviews here
-                    
                     var Reviews = new List<Review>();
                     using (var reviewReader = new StreamReader(fileReviews))
                     {
@@ -55,7 +58,7 @@ namespace BLRestaurants
                             string[] values2 = line2.Split(',');
                             
 
-                            if (values[1] == values2[1]) // (if ID of restaurant equals the reviews' restaurant ID. values2 is the list of reviews
+                            if (values[1] == values2[1]) // the compairs the restaurant name
                             {
                                 int intParse2;
                                 if (int.TryParse(values2[0], out intParse2))

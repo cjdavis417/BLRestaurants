@@ -21,8 +21,12 @@ namespace BLRestaurants
         public string State { get; set; }
         public int Zip { get; set; }
         public string Telephone { get; set; }
-        
 
+        /// <summary>
+        /// Calculates the restaurant average rating.
+        /// </summary>
+        /// <param name="reviews">List of type 'Review'</param>
+        /// <returns></returns>
         public double CalcAverage(List<Review> reviews)
         {
             double average = 0.0;
