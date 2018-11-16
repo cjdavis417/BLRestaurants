@@ -58,7 +58,7 @@ namespace BLRestaurants
                             string[] values2 = line2.Split(',');
                             
 
-                            if (values[1] == values2[1]) // the compairs the restaurant name
+                            if (values[1] == values2[1]) // the compares the restaurant name
                             {
                                 int intParse2;
                                 if (int.TryParse(values2[0], out intParse2))

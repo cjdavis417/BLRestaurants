@@ -43,8 +43,7 @@ namespace BLRestaurants
                 Console.Write("Command:> ");
                 command = Console.ReadLine();
                 command = command.ToLower(); // this makes all commands lowercase
-                //string.Compare(command, "help", true) == 0 //(command, "help");
-
+                
                 if (command == "help")
                     Commands(ListOfCommands);
                 else if (command == "print all")
@@ -58,6 +57,10 @@ namespace BLRestaurants
             } while (true);
         }
 
+        /// <summary>
+        /// Method for selecting restaurant
+        /// </summary>
+        /// <param name="restaurants">List of type Restaurant</param>
         private void SelectRestaurantReview(List<Restaurant> restaurants)
         {
             Restaurant restaurantReviews = new Restaurant();
@@ -115,7 +118,6 @@ namespace BLRestaurants
                 Console.WriteLine("{0}, {1} {2}", restaurantReviews.City, restaurantReviews.State, restaurantReviews.Zip);
                 Console.WriteLine("Average Rating: {0} ({1} reviews)",
                     restaurantReviews.ReviewAverage, restaurantReviews.Reviews.Count);
-
             }
 
             
@@ -136,6 +138,10 @@ namespace BLRestaurants
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// Method to display available commands.
+        /// </summary>
+        /// <param name="commands">Command list</param>
         public void Commands(List<string> commands)
         {
             foreach (var command in commands)
@@ -145,6 +151,10 @@ namespace BLRestaurants
             ReceiveCommand();
         }
 
+        /// <summary>
+        /// Method to list restaurants
+        /// </summary>
+        /// <param name="restaurantList">List of type Restaurant</param>
         public void ListRestaurants(List<Restaurant> restaurantList)
         {
 
@@ -163,23 +173,6 @@ namespace BLRestaurants
             }
 
             ReceiveCommand();
-        }
-
-        public void LocationBuilder(List<Restaurant> restaurants, string restaurantName)
-        {
-            List<Restaurant> restaurantLocs = new List<Restaurant>();
-            foreach (var restaurant in restaurants)
-            {
-                if (restaurant.RestaurantName == restaurantName)
-                {
-                    restaurantLocs.Add(restaurant);
-                }
-            }
-
-            foreach (var restaurant in restaurantLocs)
-            {
-                Console.Write("{0} {1}", restaurant.StreetAddress, restaurant.City);
-            }
         }
 
         /// <summary>
